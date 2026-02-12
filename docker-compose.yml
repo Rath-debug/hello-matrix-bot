@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  matrix-bot:
+    build: .
+    container_name: hello-matrix-bot
+    restart: unless-stopped
+    environment:
+      HOMESERVER_URL: "https://synapse-production-ea3f.up.railway.app"
+    volumes:
+      - ./data:/app/data

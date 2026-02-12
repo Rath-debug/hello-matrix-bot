@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+npm-debug.log
+*.log
+.env
+text.txt
+hello-bot.json
+package.json
+package-lock.json
+code.txt
+synapse
+synapse/postgres-data
