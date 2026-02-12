@@ -16,7 +16,7 @@ LogService.muteModule("Metrics"); // if it’s too chatty
 const homeserverUrl = process.env.HOMESERVER_URL ||"https://synapse-production-ea3f.up.railway.app";
 
 // Use the access token you got from login or registration above.
-const accessToken = process.env.ACCESS_TOKEN || "mat_Qx00zKPVddst8T5PyowqiKjkNtUXqh_jV6Df3";
+const accessToken = process.env.ACCESS_TOKEN || "mat_vZuV3JnHkgI9qVygqIoL3l6Lo1qxt3_mCRk94";
 
 const storage = new SimpleFsStorageProvider("hello-bot.json");
 

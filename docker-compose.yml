@@ -6,6 +6,5 @@ services:
     restart: unless-stopped
     environment:
       HOMESERVER_URL: "https://synapse-production-ea3f.up.railway.app"
-      ACCESS_TOKEN: "mat_o0MtMfydBV5lfSBlmcoZQFEGIgNYsI_lxBnL2"
     volumes:
       - ./data:/app/data
