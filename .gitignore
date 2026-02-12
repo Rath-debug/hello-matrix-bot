@@ -6,8 +6,6 @@ npm-debug.log
 .env
 text.txt
 hello-bot.json
-package.json
-package-lock.json
 code.txt
 synapse
 synapse/postgres-data
