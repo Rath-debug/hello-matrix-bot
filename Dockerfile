@@ -1,17 +1,20 @@
-# Use Debian slim instead of Alpine
+# Use Debian slim instead of Alpine for glibc compatibility
 FROM node:22-slim
 
+# Set working directory inside container
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files first (for dependency caching)
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy source code
+# Copy the rest of your source code
 COPY . .
 
-# If you want to run TS directly:
+# Install ts-node globally if you want to run TypeScript directly
 RUN npm install -g ts-node
 
-# Run your bot
+# Default command to run your bot
 CMD ["ts-node", "index.ts"]
