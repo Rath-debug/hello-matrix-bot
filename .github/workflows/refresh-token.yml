@@ -1,0 +1,54 @@
+name: Daily Token Refresh
+
+on:
+  schedule:
+    # Run every day at 2 AM UTC
+    - cron: '0 2 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  refresh-token:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install matrix-bot-sdk dotenv
+
+      - name: Refresh access token
+        env:
+          HOMESERVER_URL: ${{ secrets.HOMESERVER_URL }}
+          BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
+          BOT_PASSWORD: ${{ secrets.BOT_PASSWORD }}
+        run: |
+          node scripts/refresh-token.js
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Matrix Bot Token Refresher"
+          git config --global user.email "bot+github@example.com"
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet .env; then
+            echo "✅ No changes to .env (token unchanged)"
+          else
+            echo "🔄 Token has changed, committing..."
+            git add .env
+            git commit -m "🔄 Automated token refresh - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          fi
+
+      - name: Status
+        run: |
+          echo "✅ Token refresh workflow completed"
+          echo "Check .env file for updated ACCESS_TOKEN"
